@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerson Humberto Tamele — Projectos</title>
+<style>
+  :root{
+    --ink:#1c1c1c;
+    --muted:#8a8378;
+    --orange:#e0580c;
+    --cream:#faf8f5;
+    --line:#e8e3db;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+  }
+
+  .wrap{
+    max-width:420px;
+    margin:0 auto;
+    padding:100px 24px 60px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .mark{
+    width:6px;
+    height:6px;
+    background:var(--orange);
+    border-radius:50%;
+    margin-bottom:24px;
+  }
+
+  h1{
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:0.2px;
+    margin:0 0 4px;
+  }
+
+  .role{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:20px;
+  }
+
+  .email{
+    font-size:13px;
+    color:var(--muted);
+    text-decoration:none;
+    margin-bottom:56px;
+    display:inline-block;
+    width:fit-content;
+  }
+  .email:hover{ color:var(--orange); }
+
+  .section-label{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+
+  .links{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:44px;
+  }
+
+  a.card{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    padding:16px 2px;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--line);
+    transition:opacity .15s ease;
+  }
+  .links a.card:first-child{ border-top:1px solid var(--line); }
+
+  .card-title{ font-weight:500; font-size:14.5px; }
+  .card-sub{ font-size:11.5px; color:var(--muted); }
+
+  .arrow{
+    color:var(--muted);
+    font-size:14px;
+    transition:transform .15s ease, color .15s ease;
+    flex:0 0 auto;
+  }
+  a.card:hover .card-title{ color:var(--orange); }
+  a.card:hover .arrow{ color:var(--orange); transform:translateX(2px); }
+
+  footer{
+    font-size:10.5px;
+    color:var(--muted);
+    opacity:0.7;
+  }
+
+  @media (max-width:480px){
+    .wrap{ padding:64px 20px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="mark"></div>
+  <h1>Gerson Humberto Tamele</h1>
+  <div class="role">Desenvolvedor Web</div>
+  <a class="email" href="mailto:info.gersontamele@gmail.com">info.gersontamele@gmail.com</a>
+
+  <div class="section-label">Loja Online</div>
+  <div class="links">
+    <a class="card" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener">
+      <span>
+        <span class="card-title">MilionStore — Loja E-commerce</span><br>
+        <span class="card-sub">milionstore-6b1cd.web.app</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="section-label">Repositórios GitHub</div>
+  <div class="links">
+    <a class="card" href="https://github.com/GersonPie" target="_blank" rel="noopener">
+      <span>
+        <span class="card-title">GersonPie — Perfil GitHub</span><br>
+        <span class="card-sub">github.com/GersonPie</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card" href="https://github.com/GersonPie/gestor-de-microcredito" target="_blank" rel="noopener">
+      <span>
+        <span class="card-title">Gestor de Microcrédito</span><br>
+        <span class="card-sub">gestor-de-microcredito</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card" href="https://github.com/GersonPie/unione-solution-lda-books-store" target="_blank" rel="noopener">
+      <span>
+        <span class="card-title">Unione Solution LDA — Livraria</span><br>
+        <span class="card-sub">unione-solution-lda-books-store</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <footer>Desenvolvido por Gerson Humberto Tamele</footer>
+
+</div>
+
+</body>
+</html>
