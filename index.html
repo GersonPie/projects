@@ -1,169 +1,1064 @@
-
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerson Humberto Tamele — Projectos</title>
-<style>
-  :root{
-    --ink:#1c1c1c;
-    --muted:#8a8378;
-    --orange:#e0580c;
-    --cream:#faf8f5;
-    --line:#e8e3db;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Gerson Humberto Tamele, a full-stack web and mobile developer.">
+  <meta name="theme-color" content="#f7faff">
+  <title>Gerson Humberto Tamele — Developer</title>
+  <script>
+    document.documentElement.classList.add('js');
+    (() => {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      const savedLanguage = localStorage.getItem('portfolio-language');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersPortuguese = navigator.language.toLowerCase().startsWith('pt');
+      document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.lang = savedLanguage || (prefersPortuguese ? 'pt' : 'en');
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f7faff;
+      --surface: #ffffff;
+      --surface-soft: #edf5ff;
+      --ink: #222b3d;
+      --ink-strong: #111827;
+      --muted: #64748b;
+      --line: #dce7f5;
+      --accent: #0878ff;
+      --accent-strong: #005fd1;
+      --accent-soft: #dcecff;
+      --shadow: 0 22px 70px rgba(34, 91, 151, 0.14);
+      --max-width: 1180px;
+    }
 
-  *{box-sizing:border-box;}
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --page: #0d111b;
+      --surface: #141b28;
+      --surface-soft: #192335;
+      --ink: #c3ccdb;
+      --ink-strong: #f3f6fb;
+      --muted: #8996aa;
+      --line: #263348;
+      --accent: #51a3ff;
+      --accent-strong: #87c0ff;
+      --accent-soft: #162f50;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+    }
 
-  body{
-    margin:0;
-    background:var(--cream);
-    font-family:'Helvetica Neue', Arial, sans-serif;
-    color:var(--ink);
-    min-height:100vh;
-  }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-  .wrap{
-    max-width:420px;
-    margin:0 auto;
-    padding:100px 24px 60px;
-    display:flex;
-    flex-direction:column;
-  }
+    body {
+      margin: 0;
+      min-width: 300px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 240ms ease, color 240ms ease;
+    }
 
-  .mark{
-    width:6px;
-    height:6px;
-    background:var(--orange);
-    border-radius:50%;
-    margin-bottom:24px;
-  }
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background:
+        radial-gradient(circle at 88% 4%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 25rem),
+        radial-gradient(circle at 8% 96%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 28rem);
+    }
 
-  h1{
-    font-size:21px;
-    font-weight:700;
-    letter-spacing:0.2px;
-    margin:0 0 4px;
-  }
+    ::selection { background: var(--accent); color: #fff; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    svg { display: block; }
 
-  .role{
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:20px;
-  }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 9px 14px;
+      border-radius: 8px;
+      background: var(--ink-strong);
+      color: var(--page);
+      font-weight: 700;
+      text-decoration: none;
+      transform: translateY(-150%);
+    }
 
-  .email{
-    font-size:13px;
-    color:var(--muted);
-    text-decoration:none;
-    margin-bottom:56px;
-    display:inline-block;
-    width:fit-content;
-  }
-  .email:hover{ color:var(--orange); }
+    .skip-link:focus { transform: translateY(0); }
+    .lang-pt { display: none; }
+    html[lang="pt"] .lang-en { display: none !important; }
+    html[lang="pt"] .lang-pt { display: revert; }
 
-  .section-label{
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin:0 0 16px;
-  }
+    .page-controls {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .links{
-    display:flex;
-    flex-direction:column;
-    margin-bottom:44px;
-  }
+    .control-group,
+    .theme-toggle {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 86%, transparent);
+      box-shadow: 0 8px 24px rgba(18, 56, 96, 0.08);
+      backdrop-filter: blur(14px);
+    }
 
-  a.card{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:16px;
-    padding:16px 2px;
-    text-decoration:none;
-    color:var(--ink);
-    border-bottom:1px solid var(--line);
-    transition:opacity .15s ease;
-  }
-  .links a.card:first-child{ border-top:1px solid var(--line); }
+    .control-group {
+      display: flex;
+      padding: 3px;
+      border-radius: 999px;
+    }
 
-  .card-title{ font-weight:500; font-size:14.5px; }
-  .card-sub{ font-size:11.5px; color:var(--muted); }
+    .language-button {
+      min-width: 38px;
+      padding: 5px 9px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
 
-  .arrow{
-    color:var(--muted);
-    font-size:14px;
-    transition:transform .15s ease, color .15s ease;
-    flex:0 0 auto;
-  }
-  a.card:hover .card-title{ color:var(--orange); }
-  a.card:hover .arrow{ color:var(--orange); transform:translateX(2px); }
+    html[lang="en"] .language-button[data-language="en"],
+    html[lang="pt"] .language-button[data-language="pt"] {
+      background: var(--accent);
+      color: #fff;
+    }
 
-  footer{
-    font-size:10.5px;
-    color:var(--muted);
-    opacity:0.7;
-  }
+    .theme-toggle {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--ink-strong);
+      cursor: pointer;
+      transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+    }
 
-  @media (max-width:480px){
-    .wrap{ padding:64px 20px 40px; }
-  }
-</style>
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle svg { width: 18px; height: 18px; }
+    .theme-toggle .moon-icon,
+    html[data-theme="dark"] .theme-toggle .sun-icon { display: none; }
+    html[data-theme="dark"] .theme-toggle .moon-icon { display: block; }
+
+    .intro {
+      display: flex;
+      min-height: 100vh;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: clamp(110px, 15vh, 170px) clamp(28px, 7vw, 92px) 80px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .intro__eyebrow {
+      display: flex;
+      margin: 0 0 clamp(22px, 5vh, 48px);
+      align-items: center;
+      gap: 14px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .intro__eyebrow::before {
+      width: 32px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--accent);
+      content: "";
+    }
+
+    .intro h1 {
+      max-width: 920px;
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: clamp(2.55rem, 6.4vw, 5rem);
+      font-weight: 350;
+      letter-spacing: -0.055em;
+      line-height: 1.09;
+    }
+
+    .intro h1 strong { color: var(--accent); font-weight: 760; }
+
+    .intro__summary {
+      max-width: 700px;
+      margin: clamp(28px, 5vh, 50px) 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.65;
+    }
+
+    .intro__contact {
+      display: flex;
+      margin-top: clamp(28px, 5vh, 46px);
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .pointing-arrow {
+      color: var(--accent);
+      font-size: 1.45rem;
+      transition: transform 180ms ease;
+    }
+
+    .intro__contact:hover .pointing-arrow { transform: translateX(5px); }
+
+    .highlight-link {
+      position: relative;
+      z-index: 0;
+      padding: 1px 3px;
+      text-decoration: none;
+    }
+
+    .highlight-link::before {
+      position: absolute;
+      inset: auto 0 2px;
+      z-index: -1;
+      height: 3px;
+      background: var(--accent);
+      content: "";
+      transition: height 180ms ease;
+    }
+
+    .highlight-link:hover::before,
+    .highlight-link:focus-visible::before { height: calc(100% - 2px); }
+
+    .highlight-link:hover,
+    .highlight-link:focus-visible { color: #fff; outline: 0; }
+
+    .scroll-cue {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: clamp(52px, 9vh, 90px);
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue::after {
+      width: 54px;
+      height: 1px;
+      background: var(--line);
+      content: "";
+      transition: width 180ms ease, background-color 180ms ease;
+    }
+
+    .scroll-cue:hover::after { width: 70px; background: var(--accent); }
+
+    .section {
+      display: grid;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: clamp(76px, 10vw, 126px) clamp(28px, 7vw, 92px);
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: clamp(40px, 7vw, 84px);
+    }
+
+    .section__title {
+      margin: 5px 0 0;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .section__content {
+      min-width: 0;
+      max-width: 760px;
+    }
+
+    .section__content > :first-child { margin-top: 0; }
+    .section__content p { margin: 0 0 22px; }
+    .section__content strong { color: var(--ink-strong); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 38px;
+    }
+
+    .skill-group h3 {
+      margin: 0 0 15px;
+      color: var(--ink-strong);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .skill-group ul { margin: 0; padding: 0; list-style: none; }
+
+    .skill-group li {
+      position: relative;
+      margin: 5px 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .skill-group li::before {
+      position: absolute;
+      top: 0.72em;
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      content: "";
+    }
+
+    .experience-card {
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience-card__top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .experience-card h3 { margin: 0; color: var(--ink-strong); font-size: 1.12rem; }
+
+    .experience-card__meta {
+      color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .experience-card__role {
+      margin: 2px 0 18px !important;
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .experience-card__description {
+      max-width: 660px;
+      margin-bottom: 0 !important;
+      color: var(--muted);
+    }
+
+    .featured .section__content { max-width: 820px; }
+
+    .featured-project {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 170px;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .project-preview {
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #edf4fb;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      transition: transform 250ms ease, box-shadow 250ms ease;
+    }
+
+    .project-preview:hover,
+    .project-preview:focus-visible {
+      outline: 0;
+      transform: translateY(-6px);
+      box-shadow: 0 30px 90px rgba(16, 93, 174, 0.2);
+    }
+
+    .browser-bar {
+      display: grid;
+      height: 34px;
+      padding: 0 12px;
+      grid-template-columns: 54px 1fr 54px;
+      align-items: center;
+      background: #dce8f4;
+    }
+
+    .browser-dots { display: flex; gap: 5px; }
+    .browser-dots span { width: 6px; height: 6px; border-radius: 50%; background: #8fa4b9; }
+
+    .browser-address {
+      overflow: hidden;
+      padding: 3px 12px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.7);
+      color: #73869b;
+      font-size: 0.48rem;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .store-ui {
+      min-height: 355px;
+      padding: 0 26px 28px;
+      background: linear-gradient(145deg, #f9fbfe, #eaf3fc);
+      color: #172238;
+    }
+
+    .store-nav {
+      display: flex;
+      height: 60px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .store-logo {
+      color: #0b64ce;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .store-search {
+      width: 42%;
+      height: 19px;
+      border: 1px solid #d6e1ed;
+      border-radius: 99px;
+      background: white;
+    }
+
+    .store-actions { display: flex; gap: 8px; }
+    .store-actions span { width: 18px; height: 18px; border-radius: 50%; background: #dfebf8; }
+
+    .store-banner {
+      display: grid;
+      overflow: hidden;
+      min-height: 112px;
+      padding: 20px 24px;
+      border-radius: 10px;
+      background: linear-gradient(120deg, #0759ba, #0d86ff);
+      grid-template-columns: 1fr 110px;
+      align-items: center;
+    }
+
+    .store-banner small {
+      display: block;
+      margin-bottom: 5px;
+      color: #cbe4ff;
+      font-size: 0.46rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .store-banner strong {
+      display: block;
+      color: #fff;
+      font-size: clamp(0.82rem, 1.6vw, 1.22rem);
+      line-height: 1.2;
+    }
+
+    .banner-art { position: relative; height: 82px; }
+
+    .banner-art::before,
+    .banner-art::after {
+      position: absolute;
+      border: 9px solid rgba(255, 255, 255, 0.82);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .banner-art::before { top: -30px; right: -30px; width: 105px; height: 105px; }
+    .banner-art::after {
+      right: 34px;
+      bottom: -29px;
+      width: 62px;
+      height: 62px;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .store-heading {
+      display: flex;
+      margin: 20px 0 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .store-heading strong { font-size: 0.66rem; }
+    .store-heading span { color: #0b70e4; font-size: 0.47rem; font-weight: 700; }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    .mock-product {
+      padding: 7px;
+      border: 1px solid #e2e9f1;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .product-art {
+      display: grid;
+      height: 76px;
+      margin-bottom: 7px;
+      place-items: center;
+      border-radius: 6px;
+      background: #eaf4ff;
+      color: #126fd5;
+    }
+
+    .mock-product:nth-child(2) .product-art { background: #f2edff; color: #7057d7; }
+    .mock-product:nth-child(3) .product-art { background: #fff1e7; color: #e26b24; }
+    .product-art svg { width: 34px; height: 34px; }
+
+    .product-line {
+      display: block;
+      width: 70%;
+      height: 4px;
+      margin: 5px 0;
+      border-radius: 99px;
+      background: #cdd9e6;
+    }
+
+    .product-price { width: 42%; background: #69a8ec; }
+    .project-caption h3 { margin: 0 0 12px; color: var(--ink-strong); font-size: 1.15rem; }
+    .project-caption p { color: var(--muted); font-size: 0.86rem; line-height: 1.55; }
+
+    .arrow-link {
+      display: inline-flex;
+      margin-top: 7px;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-strong);
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .arrow-link::after {
+      color: var(--accent);
+      content: "→";
+      font-size: 1.15rem;
+      transition: transform 180ms ease;
+    }
+
+    .arrow-link:hover { color: var(--accent); }
+    .arrow-link:hover::after { transform: translateX(5px); }
+    .project-list { display: grid; gap: 28px; }
+
+    .project-card {
+      padding: 26px 0 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-card:first-child { padding-top: 0; border-top: 0; }
+    .project-card h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .project-card h3 a { color: var(--ink-strong); text-decoration: none; }
+
+    .project-card h3 a::after {
+      display: inline-block;
+      margin-left: 9px;
+      color: var(--accent);
+      content: "↗";
+      font-size: 0.88rem;
+      transition: transform 180ms ease;
+    }
+
+    .project-card h3 a:hover { color: var(--accent); }
+    .project-card h3 a:hover::after { transform: translate(3px, -3px); }
+    .project-card p { max-width: 660px; color: var(--muted); font-size: 0.92rem; }
+
+    .tag-list {
+      display: flex;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      padding: 3px 9px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: var(--accent);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.67rem;
+      font-weight: 700;
+    }
+
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px, 6vw, 58px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel::after {
+      position: absolute;
+      right: -75px;
+      bottom: -100px;
+      width: 260px;
+      height: 260px;
+      border: 34px solid var(--accent-soft);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .contact-panel > * { position: relative; z-index: 1; }
+
+    .contact-panel h2 {
+      max-width: 530px;
+      margin: 0 0 16px;
+      color: var(--ink-strong);
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+    }
+
+    .contact-panel p { max-width: 560px; color: var(--muted); }
+
+    .contact-button {
+      display: inline-flex;
+      margin-top: 14px;
+      padding: 11px 18px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+
+    .contact-button:hover { background: var(--accent-strong); transform: translateY(-3px); }
+
+    .footer {
+      display: flex;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 36px clamp(28px, 7vw, 92px) 54px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .footer p { margin: 0; }
+    .footer__links { display: flex; align-items: center; gap: 22px; }
+
+    .footer__links a {
+      color: var(--ink-strong);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .footer__links a:hover { color: var(--accent); }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 650ms cubic-bezier(.2, .75, .25, 1), transform 650ms cubic-bezier(.2, .75, .25, 1);
+    }
+
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 860px) {
+      .section { grid-template-columns: 130px minmax(0, 1fr); gap: 42px; }
+      .featured-project { grid-template-columns: 1fr; }
+      .project-caption { max-width: 560px; }
+    }
+
+    @media (max-width: 680px) {
+      .page-controls { top: 16px; right: 18px; }
+      .intro { padding: 100px 30px 70px; }
+      .section { display: block; padding: 72px 30px; }
+      .section__title { margin-bottom: 36px; text-align: left; }
+      .section__content { padding-left: 24px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured .section__content { padding-left: 0; }
+      .store-ui { min-height: 310px; padding: 0 18px 20px; }
+      .footer { padding: 32px 30px 44px; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 460px) {
+      .intro h1 { font-size: clamp(2.35rem, 11.4vw, 3.2rem); }
+      .intro__contact { display: block; }
+      .intro__contact .pointing-arrow { display: none; }
+      .highlight-link { display: inline-block; margin-top: 7px; }
+      .section__content { padding-left: 18px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 26px; }
+      .experience-card__top { display: block; }
+      .experience-card__meta { display: block; margin-top: 5px; white-space: normal; }
+      .store-banner { grid-template-columns: 1fr 60px; }
+      .store-search { display: none; }
+      .product-art { height: 58px; }
+      .project-preview { border-radius: 10px; }
+      .footer__links { gap: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">
+    <span class="lang-en">Skip to content</span>
+    <span class="lang-pt">Saltar para o conteúdo</span>
+  </a>
 
-<div class="wrap">
-
-  <div class="mark"></div>
-  <h1>Gerson Humberto Tamele</h1>
-  <div class="role">Desenvolvedor Web</div>
-  <a class="email" href="mailto:info.gersontamele@gmail.com">info.gersontamele@gmail.com</a>
-
-  <div class="section-label">Loja Online</div>
-  <div class="links">
-    <a class="card" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener">
-      <span>
-        <span class="card-title">MilionStore — Loja E-commerce</span><br>
-        <span class="card-sub">milionstore-6b1cd.web.app</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
+  <div class="page-controls" aria-label="Display settings">
+    <div class="control-group" aria-label="Language">
+      <button class="language-button" type="button" data-language="en" aria-label="Use English">EN</button>
+      <button class="language-button" type="button" data-language="pt" aria-label="Usar português">PT</button>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme">
+      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path>
+      </svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M20.5 15.5A8.7 8.7 0 0 1 8.5 3.5a8.7 8.7 0 1 0 12 12Z"></path>
+      </svg>
+    </button>
   </div>
 
-  <div class="section-label">Repositórios GitHub</div>
-  <div class="links">
-    <a class="card" href="https://github.com/GersonPie" target="_blank" rel="noopener">
-      <span>
-        <span class="card-title">GersonPie — Perfil GitHub</span><br>
-        <span class="card-sub">github.com/GersonPie</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
+  <main id="main">
+    <header class="intro">
+      <p class="intro__eyebrow reveal">
+        <span class="lang-en">Hello, welcome</span>
+        <span class="lang-pt">Olá, seja bem-vindo</span>
+      </p>
+      <h1 class="reveal">
+        <span class="lang-en">I'm <strong>Gerson Tamele</strong>, a full-stack developer building useful digital experiences.</span>
+        <span class="lang-pt">Sou <strong>Gerson Tamele</strong>, desenvolvedor full-stack focado em experiências digitais úteis.</span>
+      </h1>
+      <p class="intro__summary reveal">
+        <span class="lang-en">I create web and mobile products with thoughtful interfaces, reliable backends, and technology chosen for the problem at hand.</span>
+        <span class="lang-pt">Crio produtos web e mobile com interfaces cuidadas, backends fiáveis e tecnologia escolhida para cada problema.</span>
+      </p>
+      <div class="intro__contact reveal">
+        <span class="lang-en">Let's build something</span>
+        <span class="lang-pt">Vamos construir algo</span>
+        <span class="pointing-arrow" aria-hidden="true">→</span>
+        <a class="highlight-link" href="mailto:info.gersontamele@gmail.com">info.gersontamele@gmail.com</a>
+      </div>
+      <a class="scroll-cue reveal" href="#background">
+        <span class="lang-en">Explore</span>
+        <span class="lang-pt">Explorar</span>
+      </a>
+    </header>
 
-    <a class="card" href="https://github.com/GersonPie/gestor-de-microcredito" target="_blank" rel="noopener">
-      <span>
-        <span class="card-title">Gestor de Microcrédito</span><br>
-        <span class="card-sub">gestor-de-microcredito</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
+    <section class="section" id="background">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Background</span>
+        <span class="lang-pt">Sobre mim</span>
+      </h2>
+      <div class="section__content reveal">
+        <p class="lang-en">I'm a full-stack developer working across web, mobile, backend services, and data. I enjoy turning complex requirements into clear, dependable products—from commerce experiences to payment integrations.</p>
+        <p class="lang-pt">Sou desenvolvedor full-stack com experiência em soluções web, mobile, serviços backend e dados. Gosto de transformar requisitos complexos em produtos claros e fiáveis—desde experiências de comércio até integrações de pagamentos.</p>
+        <p class="lang-en">My work brings together modern interfaces built with <strong>React and Next.js</strong>, service development with <strong>Node.js and C#</strong>, and practical data layers using relational and cloud databases.</p>
+        <p class="lang-pt">O meu trabalho combina interfaces modernas em <strong>React e Next.js</strong>, desenvolvimento de serviços com <strong>Node.js e C#</strong> e camadas de dados práticas com bases de dados relacionais e na cloud.</p>
+      </div>
+    </section>
 
-    <a class="card" href="https://github.com/GersonPie/unione-solution-lda-books-store" target="_blank" rel="noopener">
-      <span>
-        <span class="card-title">Unione Solution LDA — Livraria</span><br>
-        <span class="card-sub">unione-solution-lda-books-store</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
+    <section class="section" id="skills">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Skills</span>
+        <span class="lang-pt">Competências</span>
+      </h2>
+      <div class="section__content skills-grid reveal">
+        <div class="skill-group">
+          <h3><span class="lang-en">Languages & runtime</span><span class="lang-pt">Linguagens & runtime</span></h3>
+          <ul>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>C#</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3><span class="lang-en">Frameworks & tools</span><span class="lang-pt">Frameworks & ferramentas</span></h3>
+          <ul>
+            <li>React.js</li>
+            <li>React Native</li>
+            <li>Next.js</li>
+            <li>Tailwind CSS</li>
+            <li>Prisma / Sequelize</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3><span class="lang-en">Databases</span><span class="lang-pt">Bases de dados</span></h3>
+          <ul>
+            <li>PostgreSQL</li>
+            <li>MySQL</li>
+            <li>Firestore</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  <footer>Desenvolvido por Gerson Humberto Tamele</footer>
+    <section class="section" id="experience">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Experience</span>
+        <span class="lang-pt">Experiência</span>
+      </h2>
+      <div class="section__content reveal">
+        <article class="experience-card">
+          <div class="experience-card__top">
+            <h3>Unione Solution, Lda.</h3>
+            <span class="experience-card__meta">
+              <span class="lang-en">Project collaboration</span>
+              <span class="lang-pt">Colaboração em projectos</span>
+            </span>
+          </div>
+          <p class="experience-card__role">
+            <span class="lang-en">Software Developer</span>
+            <span class="lang-pt">Desenvolvedor de Software</span>
+          </p>
+          <p class="experience-card__description lang-en">Collaborated on products including <strong>UniPay</strong>, an API gateway designed to enable transactions through mobile wallets such as M-Pesa and e-Mola.</p>
+          <p class="experience-card__description lang-pt">Colaborei em produtos como o <strong>UniPay</strong>, um gateway de APIs desenvolvido para permitir transacções através de carteiras móveis como M-Pesa e e-Mola.</p>
+        </article>
+      </div>
+    </section>
 
-</div>
+    <section class="section featured" id="projects">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Featured project</span>
+        <span class="lang-pt">Projecto em destaque</span>
+      </h2>
+      <div class="section__content featured-project reveal">
+        <a class="project-preview" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener noreferrer" aria-label="Open MilionStore">
+          <div class="browser-bar" aria-hidden="true">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-address">milionstore-6b1cd.web.app/products</div>
+          </div>
+          <div class="store-ui" aria-hidden="true">
+            <div class="store-nav">
+              <span class="store-logo">MILIONSTORE</span>
+              <span class="store-search"></span>
+              <span class="store-actions"><span></span><span></span></span>
+            </div>
+            <div class="store-banner">
+              <div>
+                <small>MilionStore</small>
+                <strong>Everything you need,<br>one store away.</strong>
+              </div>
+              <div class="banner-art"></div>
+            </div>
+            <div class="store-heading">
+              <strong>Featured products</strong>
+              <span>View all →</span>
+            </div>
+            <div class="product-grid">
+              <div class="mock-product">
+                <div class="product-art">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6.5" y="2.5" width="11" height="19" rx="2"></rect><path d="M10 18.5h4"></path></svg>
+                </div>
+                <span class="product-line"></span><span class="product-line product-price"></span>
+              </div>
+              <div class="mock-product">
+                <div class="product-art">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7.5a4 4 0 0 1 8 0"></path><path d="M5.5 11a6.5 6.5 0 0 1 13 0v5.5a2 2 0 0 1-2 2h-1V12h3M8.5 18.5h-1a2 2 0 0 1-2-2V12h3v6.5Z"></path></svg>
+                </div>
+                <span class="product-line"></span><span class="product-line product-price"></span>
+              </div>
+              <div class="mock-product">
+                <div class="product-art">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m8.5 4 3.5 2 3.5-2 4 3-2.5 4v9H7v-9L4.5 7l4-3Z"></path><path d="M10 4a2.2 2.2 0 0 0 4 0"></path></svg>
+                </div>
+                <span class="product-line"></span><span class="product-line product-price"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="project-caption">
+          <h3>MilionStore</h3>
+          <p class="lang-en">An online store built to make discovering and browsing products feel simple, fast, and accessible across devices.</p>
+          <p class="lang-pt">Uma loja online criada para tornar a descoberta e navegação de produtos simples, rápida e acessível em diferentes dispositivos.</p>
+          <a class="arrow-link" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener noreferrer">
+            <span class="lang-en">View project</span>
+            <span class="lang-pt">Ver projecto</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
+    <section class="section" id="other-projects">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Other projects</span>
+        <span class="lang-pt">Outros projectos</span>
+      </h2>
+      <div class="section__content project-list">
+        <article class="project-card reveal">
+          <h3><a href="https://gestor-de-microcredito.vercel.app" target="_blank" rel="noopener noreferrer">Gestor de Microcrédito</a></h3>
+          <p class="lang-en">A web application for managing microcredit operations, bringing customer and loan tracking into one focused interface.</p>
+          <p class="lang-pt">Uma aplicação web para gerir operações de microcrédito, reunindo o acompanhamento de clientes e empréstimos numa interface focada.</p>
+          <div class="tag-list" aria-label="Technologies used">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Firebase</span>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <h3><a href="https://unione-solution-lda-books-store.vercel.app" target="_blank" rel="noopener noreferrer">Unione Books Store</a></h3>
+          <p class="lang-en">A responsive book-store experience developed for Unione Solution, with a modern catalogue interface and a dedicated service layer.</p>
+          <p class="lang-pt">Uma experiência responsiva de livraria desenvolvida para a Unione Solution, com um catálogo moderno e uma camada de serviços dedicada.</p>
+          <div class="tag-list" aria-label="Technologies used">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Vite</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2 class="section__title reveal">
+        <span class="lang-en">Contact</span>
+        <span class="lang-pt">Contacto</span>
+      </h2>
+      <div class="section__content reveal">
+        <div class="contact-panel">
+          <h2>
+            <span class="lang-en">Have a project in mind? Let's talk.</span>
+            <span class="lang-pt">Tem um projecto em mente? Vamos conversar.</span>
+          </h2>
+          <p class="lang-en">I'm always interested in thoughtful products, useful collaborations, and new technical challenges.</p>
+          <p class="lang-pt">Estou sempre interessado em produtos bem pensados, colaborações úteis e novos desafios técnicos.</p>
+          <a class="contact-button" href="mailto:info.gersontamele@gmail.com">
+            <span class="lang-en">Send an email</span>
+            <span class="lang-pt">Enviar email</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      <span class="lang-en">Designed & developed by Gerson Tamele</span>
+      <span class="lang-pt">Desenhado & desenvolvido por Gerson Tamele</span>
+      <span aria-hidden="true"> · </span><span id="year"></span>
+    </p>
+    <div class="footer__links">
+      <a href="mailto:info.gersontamele@gmail.com">Email</a>
+      <a href="https://github.com/GersonPie" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeButton = document.querySelector('.theme-toggle');
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      const languageButtons = document.querySelectorAll('.language-button');
+
+      const updateThemeLabel = () => {
+        const isDark = root.dataset.theme === 'dark';
+        const isPortuguese = root.lang === 'pt';
+        themeButton.setAttribute(
+          'aria-label',
+          isPortuguese
+            ? (isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro')
+            : (isDark ? 'Switch to light theme' : 'Switch to dark theme')
+        );
+        themeMeta.setAttribute('content', isDark ? '#0d111b' : '#f7faff');
+      };
+
+      const setLanguage = (language) => {
+        root.lang = language;
+        localStorage.setItem('portfolio-language', language);
+        document.title = language === 'pt'
+          ? 'Gerson Humberto Tamele — Desenvolvedor'
+          : 'Gerson Humberto Tamele — Developer';
+        languageButtons.forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.language === language));
+        });
+        updateThemeLabel();
+      };
+
+      languageButtons.forEach((button) => {
+        button.addEventListener('click', () => setLanguage(button.dataset.language));
+      });
+
+      themeButton.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('portfolio-theme', root.dataset.theme);
+        updateThemeLabel();
+      });
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach((item) => revealObserver.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
+      }
+
+      document.querySelector('#year').textContent = new Date().getFullYear();
+      setLanguage(root.lang === 'pt' ? 'pt' : 'en');
+      updateThemeLabel();
+      if (window.location.hash) {
+        window.setTimeout(() => {
+          document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto' });
+        }, 0);
+      }
+    })();
+  </script>
 </body>
 </html>
