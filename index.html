@@ -30,6 +30,8 @@
       --accent: #0878ff;
       --accent-strong: #005fd1;
       --accent-soft: #dcecff;
+      --grid-line: rgba(8, 120, 255, 0.09);
+      --grid-highlight: rgba(8, 120, 255, 0.42);
       --shadow: 0 22px 70px rgba(34, 91, 151, 0.14);
       --max-width: 1180px;
     }
@@ -46,6 +48,8 @@
       --accent: #51a3ff;
       --accent-strong: #87c0ff;
       --accent-soft: #162f50;
+      --grid-line: rgba(81, 163, 255, 0.1);
+      --grid-highlight: rgba(81, 163, 255, 0.52);
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
     }
 
@@ -77,6 +81,54 @@
 
     html[data-theme="dark"] body::before {
       background: none;
+    }
+
+    .grid-background {
+      --grid-x: 82vw;
+      --grid-y: 32vh;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .grid-background::before,
+    .grid-background::after {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-position: -1px -1px;
+      background-size: 42px 42px;
+      content: "";
+    }
+
+    .grid-background::before {
+      opacity: 0.34;
+    }
+
+    .grid-background::after {
+      background-image:
+        linear-gradient(to right, var(--grid-highlight) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-highlight) 1px, transparent 1px),
+        radial-gradient(circle 210px at var(--grid-x) var(--grid-y), color-mix(in srgb, var(--accent) 7%, transparent), transparent 72%);
+      opacity: 0.18;
+      filter: drop-shadow(0 0 2px color-mix(in srgb, var(--accent) 24%, transparent));
+      -webkit-mask-image: radial-gradient(circle 230px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.82) 42%, transparent 76%);
+      mask-image: radial-gradient(circle 230px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.82) 42%, transparent 76%);
+      transition: opacity 420ms ease;
+    }
+
+    .grid-background.is-active::after {
+      opacity: 0.72;
+    }
+
+    main,
+    .footer {
+      position: relative;
+      z-index: 1;
     }
 
     ::selection { background: var(--accent); color: #fff; }
@@ -735,6 +787,9 @@
     }
 
     @media (max-width: 680px) {
+      .grid-background::before { opacity: 0.24; }
+      .grid-background::after,
+      .grid-background.is-active::after { opacity: 0.24; }
       .page-controls { top: 16px; right: 18px; }
       .intro { padding: 100px 30px 70px; }
       .section { display: block; padding: 72px 30px; }
@@ -773,6 +828,8 @@
   </style>
 </head>
 <body>
+  <div class="grid-background" id="grid-background" aria-hidden="true"></div>
+
   <a class="skip-link" href="#main">
     <span class="lang-en">Skip to content</span>
     <span class="lang-pt">Saltar para o conteúdo</span>
@@ -1113,6 +1170,39 @@
           document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto' });
         }, 0);
       }
+    })();
+  </script>
+  <script>
+    (() => {
+      const grid = document.querySelector('#grid-background');
+      if (!grid) return;
+
+      let pointerX = window.innerWidth * 0.82;
+      let pointerY = window.innerHeight * 0.32;
+      let updateFrame = 0;
+
+      const paint = () => {
+        grid.style.setProperty('--grid-x', `${pointerX}px`);
+        grid.style.setProperty('--grid-y', `${pointerY}px`);
+        updateFrame = 0;
+      };
+
+      window.addEventListener('pointermove', (event) => {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        grid.classList.add('is-active');
+        if (!updateFrame) updateFrame = requestAnimationFrame(paint);
+      }, { passive: true });
+
+      document.documentElement.addEventListener('mouseleave', () => {
+        grid.classList.remove('is-active');
+      });
+
+      window.addEventListener('blur', () => {
+        grid.classList.remove('is-active');
+      });
+
+      paint();
     })();
   </script>
 </body>
