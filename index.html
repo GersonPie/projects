@@ -448,24 +448,16 @@
     .project-preview {
       position: relative;
       display: grid;
-      overflow: hidden;
       min-height: 385px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 68% 44%, rgba(31, 139, 255, 0.3), transparent 36%),
-        linear-gradient(135deg, #020810, #071a34 58%, #063d7a);
-      box-shadow: var(--shadow);
       place-items: center;
       text-decoration: none;
-      transition: transform 250ms ease, box-shadow 250ms ease;
+      transition: transform 250ms ease;
     }
 
     .project-preview:hover,
     .project-preview:focus-visible {
       outline: 0;
       transform: translateY(-6px);
-      box-shadow: 0 30px 90px rgba(16, 93, 174, 0.2);
     }
 
     .project-preview__label {
@@ -490,7 +482,7 @@
     }
 
     .project-preview__label strong {
-      color: #fff;
+      color: var(--ink-strong);
       font-size: clamp(1.25rem, 2.4vw, 1.75rem);
       letter-spacing: -0.035em;
     }
@@ -714,7 +706,7 @@
       .skills-grid { grid-template-columns: 1fr; gap: 26px; }
       .experience-card__top { display: block; }
       .experience-card__meta { display: block; margin-top: 5px; white-space: normal; }
-      .project-preview { min-height: 300px; border-radius: 10px; }
+      .project-preview { min-height: 300px; }
       .project-preview__image { left: -22.5%; width: 145%; }
       .project-preview__label { top: 22px; left: 20px; }
       .footer__links { gap: 16px; }
