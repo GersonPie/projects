@@ -84,7 +84,7 @@ When adding new text, include both language versions:
 
 - WhatsApp: [+258 83 419 5682](https://wa.me/258834195682)
 - Email: [infgersontamele@outlook.com](mailto:infgersontamele@outlook.com)
-- Instagram: [@imcapi.tag](https://instagram.com/imcapi.tag)
+- Instagram: [@imcapi.talg](https://instagram.com/imcapi.talg)
 - GitHub: [GersonPie](https://github.com/GersonPie)
 
 ## Deployment
