@@ -446,12 +446,17 @@
     }
 
     .project-preview {
-      display: block;
+      position: relative;
+      display: grid;
       overflow: hidden;
+      min-height: 385px;
       border: 1px solid var(--line);
       border-radius: 14px;
-      background: #edf4fb;
+      background:
+        radial-gradient(circle at 68% 44%, rgba(31, 139, 255, 0.3), transparent 36%),
+        linear-gradient(135deg, #020810, #071a34 58%, #063d7a);
       box-shadow: var(--shadow);
+      place-items: center;
       text-decoration: none;
       transition: transform 250ms ease, box-shadow 250ms ease;
     }
@@ -463,152 +468,50 @@
       box-shadow: 0 30px 90px rgba(16, 93, 174, 0.2);
     }
 
-    .browser-bar {
-      display: grid;
-      height: 34px;
-      padding: 0 12px;
-      grid-template-columns: 54px 1fr 54px;
-      align-items: center;
-      background: #dce8f4;
-    }
-
-    .browser-dots { display: flex; gap: 5px; }
-    .browser-dots span { width: 6px; height: 6px; border-radius: 50%; background: #8fa4b9; }
-
-    .browser-address {
-      overflow: hidden;
-      padding: 3px 12px;
-      border-radius: 99px;
-      background: rgba(255, 255, 255, 0.7);
-      color: #73869b;
-      font-size: 0.48rem;
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .store-ui {
-      min-height: 355px;
-      padding: 0 26px 28px;
-      background: linear-gradient(145deg, #f9fbfe, #eaf3fc);
-      color: #172238;
-    }
-
-    .store-nav {
+    .project-preview__label {
+      position: absolute;
+      top: clamp(25px, 5vw, 42px);
+      left: clamp(24px, 5vw, 42px);
+      z-index: 2;
       display: flex;
-      height: 60px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      flex-direction: column;
+      color: #fff;
+      line-height: 1.15;
     }
 
-    .store-logo {
-      color: #0b64ce;
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-    }
-
-    .store-search {
-      width: 42%;
-      height: 19px;
-      border: 1px solid #d6e1ed;
-      border-radius: 99px;
-      background: white;
-    }
-
-    .store-actions { display: flex; gap: 8px; }
-    .store-actions span { width: 18px; height: 18px; border-radius: 50%; background: #dfebf8; }
-
-    .store-banner {
-      display: grid;
-      overflow: hidden;
-      min-height: 112px;
-      padding: 20px 24px;
-      border-radius: 10px;
-      background: linear-gradient(120deg, #0759ba, #0d86ff);
-      grid-template-columns: 1fr 110px;
-      align-items: center;
-    }
-
-    .store-banner small {
-      display: block;
-      margin-bottom: 5px;
-      color: #cbe4ff;
-      font-size: 0.46rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+    .project-preview__label span {
+      margin-bottom: 9px;
+      color: #72b6ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .store-banner strong {
-      display: block;
+    .project-preview__label strong {
       color: #fff;
-      font-size: clamp(0.82rem, 1.6vw, 1.22rem);
-      line-height: 1.2;
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      letter-spacing: -0.035em;
     }
 
-    .banner-art { position: relative; height: 82px; }
-
-    .banner-art::before,
-    .banner-art::after {
+    .project-preview__image {
       position: absolute;
-      border: 9px solid rgba(255, 255, 255, 0.82);
-      border-radius: 50%;
-      content: "";
-    }
-
-    .banner-art::before { top: -30px; right: -30px; width: 105px; height: 105px; }
-    .banner-art::after {
-      right: 34px;
-      bottom: -29px;
-      width: 62px;
-      height: 62px;
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-
-    .store-heading {
-      display: flex;
-      margin: 20px 0 10px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .store-heading strong { font-size: 0.66rem; }
-    .store-heading span { color: #0b70e4; font-size: 0.47rem; font-weight: 700; }
-    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-
-    .mock-product {
-      padding: 7px;
-      border: 1px solid #e2e9f1;
-      border-radius: 8px;
-      background: white;
-    }
-
-    .product-art {
-      display: grid;
-      height: 76px;
-      margin-bottom: 7px;
-      place-items: center;
-      border-radius: 6px;
-      background: #eaf4ff;
-      color: #126fd5;
-    }
-
-    .mock-product:nth-child(2) .product-art { background: #f2edff; color: #7057d7; }
-    .mock-product:nth-child(3) .product-art { background: #fff1e7; color: #e26b24; }
-    .product-art svg { width: 34px; height: 34px; }
-
-    .product-line {
+      top: 50%;
+      left: -7.5%;
+      z-index: 1;
       display: block;
-      width: 70%;
-      height: 4px;
-      margin: 5px 0;
-      border-radius: 99px;
-      background: #cdd9e6;
+      width: 115%;
+      height: auto;
+      max-width: none;
+      filter: drop-shadow(0 26px 34px rgba(0, 0, 0, 0.28));
+      transform: translateY(-50%);
+      transition: transform 450ms cubic-bezier(.2, .75, .25, 1);
     }
 
-    .product-price { width: 42%; background: #69a8ec; }
+    .project-preview:hover .project-preview__image {
+      transform: translateY(-50%) scale(1.025) translateX(4px);
+    }
     .project-caption h3 { margin: 0 0 12px; color: var(--ink-strong); font-size: 1.15rem; }
     .project-caption p { color: var(--muted); font-size: 0.86rem; line-height: 1.55; }
 
@@ -797,7 +700,8 @@
       .section__content { padding-left: 24px; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .featured .section__content { padding-left: 0; }
-      .store-ui { min-height: 310px; padding: 0 18px 20px; }
+      .project-preview { min-height: 340px; }
+      .project-preview__image { left: -15%; width: 130%; }
       .footer { padding: 32px 30px 44px; flex-direction: column; align-items: flex-start; }
     }
 
@@ -810,10 +714,9 @@
       .skills-grid { grid-template-columns: 1fr; gap: 26px; }
       .experience-card__top { display: block; }
       .experience-card__meta { display: block; margin-top: 5px; white-space: normal; }
-      .store-banner { grid-template-columns: 1fr 60px; }
-      .store-search { display: none; }
-      .product-art { height: 58px; }
-      .project-preview { border-radius: 10px; }
+      .project-preview { min-height: 300px; border-radius: 10px; }
+      .project-preview__image { left: -22.5%; width: 145%; }
+      .project-preview__label { top: 22px; left: 20px; }
       .footer__links { gap: 16px; }
     }
 
@@ -958,48 +861,11 @@
       </h2>
       <div class="section__content featured-project reveal">
         <a class="project-preview" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener noreferrer" aria-label="Open MilionStore">
-          <div class="browser-bar" aria-hidden="true">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-address">milionstore-6b1cd.web.app/products</div>
-          </div>
-          <div class="store-ui" aria-hidden="true">
-            <div class="store-nav">
-              <span class="store-logo">MILIONSTORE</span>
-              <span class="store-search"></span>
-              <span class="store-actions"><span></span><span></span></span>
-            </div>
-            <div class="store-banner">
-              <div>
-                <small>MilionStore</small>
-                <strong>Everything you need,<br>one store away.</strong>
-              </div>
-              <div class="banner-art"></div>
-            </div>
-            <div class="store-heading">
-              <strong>Featured products</strong>
-              <span>View all →</span>
-            </div>
-            <div class="product-grid">
-              <div class="mock-product">
-                <div class="product-art">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6.5" y="2.5" width="11" height="19" rx="2"></rect><path d="M10 18.5h4"></path></svg>
-                </div>
-                <span class="product-line"></span><span class="product-line product-price"></span>
-              </div>
-              <div class="mock-product">
-                <div class="product-art">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7.5a4 4 0 0 1 8 0"></path><path d="M5.5 11a6.5 6.5 0 0 1 13 0v5.5a2 2 0 0 1-2 2h-1V12h3M8.5 18.5h-1a2 2 0 0 1-2-2V12h3v6.5Z"></path></svg>
-                </div>
-                <span class="product-line"></span><span class="product-line product-price"></span>
-              </div>
-              <div class="mock-product">
-                <div class="product-art">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m8.5 4 3.5 2 3.5-2 4 3-2.5 4v9H7v-9L4.5 7l4-3Z"></path><path d="M10 4a2.2 2.2 0 0 0 4 0"></path></svg>
-                </div>
-                <span class="product-line"></span><span class="product-line product-price"></span>
-              </div>
-            </div>
-          </div>
+          <span class="project-preview__label" aria-hidden="true">
+            <span>Mobile commerce</span>
+            <strong>MilionStore</strong>
+          </span>
+          <img class="project-preview__image" src="assets/milionstore-phone.png" width="1536" height="1024" alt="3D smartphone displaying the MilionStore mobile shopping interface">
         </a>
         <div class="project-caption">
           <h3>MilionStore</h3>
