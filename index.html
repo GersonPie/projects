@@ -569,27 +569,8 @@
     }
 
     .contact-panel {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(32px, 6vw, 58px);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      max-width: 720px;
     }
-
-    .contact-panel::after {
-      position: absolute;
-      right: -75px;
-      bottom: -100px;
-      width: 260px;
-      height: 260px;
-      border: 34px solid var(--accent-soft);
-      border-radius: 50%;
-      content: "";
-    }
-
-    .contact-panel > * { position: relative; z-index: 1; }
 
     .contact-panel h2 {
       max-width: 530px;
@@ -604,10 +585,10 @@
 
     .contact-actions {
       display: flex;
-      margin-top: 20px;
+      margin-top: 28px;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px 18px;
+      gap: 14px 22px;
     }
 
     .contact-button {
@@ -615,7 +596,7 @@
       padding: 11px 18px;
       align-items: center;
       gap: 10px;
-      border-radius: 7px;
+      border-radius: 999px;
       background: var(--accent);
       color: #fff;
       font-size: 0.86rem;
@@ -628,11 +609,11 @@
 
     .contact-detail {
       display: inline-flex;
-      padding: 7px 2px;
+      padding: 8px 0;
       align-items: center;
       gap: 7px;
       color: var(--ink-strong);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 750;
       overflow-wrap: anywhere;
       text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
