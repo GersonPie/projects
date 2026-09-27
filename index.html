@@ -655,9 +655,16 @@
 
     .contact-panel p { max-width: 560px; color: var(--muted); }
 
+    .contact-actions {
+      display: flex;
+      margin-top: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+    }
+
     .contact-button {
       display: inline-flex;
-      margin-top: 14px;
       padding: 11px 18px;
       align-items: center;
       gap: 10px;
@@ -672,6 +679,22 @@
 
     .contact-button:hover { background: var(--accent-strong); transform: translateY(-3px); }
 
+    .contact-detail {
+      display: inline-flex;
+      padding: 7px 2px;
+      align-items: center;
+      gap: 7px;
+      color: var(--ink-strong);
+      font-size: 0.78rem;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+    }
+
+    .contact-detail:hover { color: var(--accent); }
+
     .footer {
       display: flex;
       max-width: var(--max-width);
@@ -685,7 +708,7 @@
     }
 
     .footer p { margin: 0; }
-    .footer__links { display: flex; align-items: center; gap: 22px; }
+    .footer__links { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 22px; }
 
     .footer__links a {
       color: var(--ink-strong);
@@ -789,7 +812,7 @@
         <span class="lang-en">Let's build something</span>
         <span class="lang-pt">Vamos construir algo</span>
         <span class="pointing-arrow" aria-hidden="true">→</span>
-        <a class="highlight-link" href="mailto:info.gersontamele@gmail.com">info.gersontamele@gmail.com</a>
+        <a class="highlight-link" href="mailto:infgersontamele@outlook.com">infgersontamele@outlook.com</a>
       </div>
       <a class="scroll-cue reveal" href="#background">
         <span class="lang-en">Explore</span>
@@ -999,11 +1022,15 @@
           </h2>
           <p class="lang-en">I'm always interested in thoughtful products, useful collaborations, and new technical challenges.</p>
           <p class="lang-pt">Estou sempre interessado em produtos bem pensados, colaborações úteis e novos desafios técnicos.</p>
-          <a class="contact-button" href="mailto:info.gersontamele@gmail.com">
-            <span class="lang-en">Send an email</span>
-            <span class="lang-pt">Enviar email</span>
-            <span aria-hidden="true">→</span>
-          </a>
+          <div class="contact-actions">
+            <a class="contact-button" href="https://wa.me/258834195682" target="_blank" rel="noopener noreferrer" aria-label="Contact Gerson on WhatsApp">
+              <span class="lang-en">Chat on WhatsApp</span>
+              <span class="lang-pt">Conversar no WhatsApp</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-detail" href="mailto:infgersontamele@outlook.com">infgersontamele@outlook.com <span aria-hidden="true">↗</span></a>
+            <a class="contact-detail" href="https://instagram.com/imcapi.tag" target="_blank" rel="noopener noreferrer">@imcapi.tag <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </section>
@@ -1016,7 +1043,9 @@
       <span aria-hidden="true"> · </span><span id="year"></span>
     </p>
     <div class="footer__links">
-      <a href="mailto:info.gersontamele@gmail.com">Email</a>
+      <a href="mailto:infgersontamele@outlook.com">Email</a>
+      <a href="https://wa.me/258834195682" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="https://instagram.com/imcapi.tag" target="_blank" rel="noopener noreferrer">Instagram</a>
       <a href="https://github.com/GersonPie" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </footer>
