@@ -75,6 +75,8 @@ When adding new text, include both language versions:
 ## Featured work
 
 - [MilionStore](https://milionstore-6b1cd.web.app/products)
+- [MOVEZA](https://moveza-pi.vercel.app/)
+- [Unione Solution](https://unionesolution.vercel.app/)
 - [Gestor de Microcrédito](https://gestor-de-microcredito.vercel.app)
 - [Unione Books Store](https://unione-solution-lda-books-store.vercel.app)
 
