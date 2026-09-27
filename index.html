@@ -30,8 +30,8 @@
       --accent: #0878ff;
       --accent-strong: #005fd1;
       --accent-soft: #dcecff;
-      --grid-line: rgba(8, 120, 255, 0.09);
-      --grid-highlight: rgba(8, 120, 255, 0.42);
+      --grid-line: rgba(8, 120, 255, 0.055);
+      --grid-highlight: rgba(8, 120, 255, 0.24);
       --shadow: 0 22px 70px rgba(34, 91, 151, 0.14);
       --max-width: 1180px;
     }
@@ -48,8 +48,8 @@
       --accent: #51a3ff;
       --accent-strong: #87c0ff;
       --accent-soft: #162f50;
-      --grid-line: rgba(81, 163, 255, 0.1);
-      --grid-highlight: rgba(81, 163, 255, 0.52);
+      --grid-line: rgba(81, 163, 255, 0.065);
+      --grid-highlight: rgba(81, 163, 255, 0.3);
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
     }
 
@@ -101,28 +101,28 @@
         linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
       background-position: -1px -1px;
-      background-size: 42px 42px;
+      background-size: 72px 72px;
       content: "";
     }
 
     .grid-background::before {
-      opacity: 0.34;
+      opacity: 0.2;
     }
 
     .grid-background::after {
       background-image:
         linear-gradient(to right, var(--grid-highlight) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid-highlight) 1px, transparent 1px),
-        radial-gradient(circle 210px at var(--grid-x) var(--grid-y), color-mix(in srgb, var(--accent) 7%, transparent), transparent 72%);
-      opacity: 0.18;
-      filter: drop-shadow(0 0 2px color-mix(in srgb, var(--accent) 24%, transparent));
-      -webkit-mask-image: radial-gradient(circle 230px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.82) 42%, transparent 76%);
-      mask-image: radial-gradient(circle 230px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.82) 42%, transparent 76%);
-      transition: opacity 420ms ease;
+        radial-gradient(circle 280px at var(--grid-x) var(--grid-y), color-mix(in srgb, var(--accent) 4%, transparent), transparent 76%);
+      opacity: 0.06;
+      filter: drop-shadow(0 0 1px color-mix(in srgb, var(--accent) 16%, transparent));
+      -webkit-mask-image: radial-gradient(circle 320px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.68) 44%, transparent 82%);
+      mask-image: radial-gradient(circle 320px at var(--grid-x) var(--grid-y), #000 0%, rgba(0, 0, 0, 0.68) 44%, transparent 82%);
+      transition: opacity 600ms ease;
     }
 
     .grid-background.is-active::after {
-      opacity: 0.72;
+      opacity: 0.38;
     }
 
     main,
@@ -787,9 +787,9 @@
     }
 
     @media (max-width: 680px) {
-      .grid-background::before { opacity: 0.24; }
+      .grid-background::before { opacity: 0.14; }
       .grid-background::after,
-      .grid-background.is-active::after { opacity: 0.24; }
+      .grid-background.is-active::after { opacity: 0.16; }
       .page-controls { top: 16px; right: 18px; }
       .intro { padding: 100px 30px 70px; }
       .section { display: block; padding: 72px 30px; }
@@ -1179,17 +1179,27 @@
 
       let pointerX = window.innerWidth * 0.82;
       let pointerY = window.innerHeight * 0.32;
+      let targetX = pointerX;
+      let targetY = pointerY;
       let updateFrame = 0;
 
       const paint = () => {
+        pointerX += (targetX - pointerX) * 0.055;
+        pointerY += (targetY - pointerY) * 0.055;
         grid.style.setProperty('--grid-x', `${pointerX}px`);
         grid.style.setProperty('--grid-y', `${pointerY}px`);
-        updateFrame = 0;
+        if (Math.abs(targetX - pointerX) > 0.35 || Math.abs(targetY - pointerY) > 0.35) {
+          updateFrame = requestAnimationFrame(paint);
+        } else {
+          pointerX = targetX;
+          pointerY = targetY;
+          updateFrame = 0;
+        }
       };
 
       window.addEventListener('pointermove', (event) => {
-        pointerX = event.clientX;
-        pointerY = event.clientY;
+        targetX = event.clientX;
+        targetY = event.clientY;
         grid.classList.add('is-active');
         if (!updateFrame) updateFrame = requestAnimationFrame(paint);
       }, { passive: true });
