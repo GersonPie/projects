@@ -36,7 +36,7 @@
 
     html[data-theme="dark"] {
       color-scheme: dark;
-      --page: #0d111b;
+      --page: #000000;
       --surface: #141b28;
       --surface-soft: #192335;
       --ink: #c3ccdb;
@@ -73,6 +73,10 @@
       background:
         radial-gradient(circle at 88% 4%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 25rem),
         radial-gradient(circle at 8% 96%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 28rem);
+    }
+
+    html[data-theme="dark"] body::before {
+      background: none;
     }
 
     ::selection { background: var(--accent); color: #fff; }
@@ -1033,7 +1037,7 @@
             ? (isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro')
             : (isDark ? 'Switch to light theme' : 'Switch to dark theme')
         );
-        themeMeta.setAttribute('content', isDark ? '#0d111b' : '#f7faff');
+        themeMeta.setAttribute('content', isDark ? '#000000' : '#f7faff');
       };
 
       const setLanguage = (language) => {
