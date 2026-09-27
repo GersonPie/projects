@@ -460,33 +460,6 @@
       transform: translateY(-6px);
     }
 
-    .project-preview__label {
-      position: absolute;
-      top: clamp(25px, 5vw, 42px);
-      left: clamp(24px, 5vw, 42px);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      color: #fff;
-      line-height: 1.15;
-    }
-
-    .project-preview__label span {
-      margin-bottom: 9px;
-      color: #72b6ff;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.58rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .project-preview__label strong {
-      color: var(--ink-strong);
-      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-      letter-spacing: -0.035em;
-    }
-
     .project-preview__image {
       position: absolute;
       top: 50%;
@@ -689,7 +662,6 @@
       .experience-card__meta { display: block; margin-top: 5px; white-space: normal; }
       .project-preview { min-height: 300px; }
       .project-preview__image { left: -22.5%; width: 145%; }
-      .project-preview__label { top: 22px; left: 20px; }
       .footer__links { gap: 16px; }
     }
 
@@ -834,10 +806,6 @@
       </h2>
       <div class="section__content featured-project reveal">
         <a class="project-preview" href="https://milionstore-6b1cd.web.app/products" target="_blank" rel="noopener noreferrer" aria-label="Open MilionStore">
-          <span class="project-preview__label" aria-hidden="true">
-            <span>Mobile commerce</span>
-            <strong>MilionStore</strong>
-          </span>
           <img class="project-preview__image" src="assets/milionstore-phone.png" width="1536" height="1024" alt="3D smartphone displaying the MilionStore mobile shopping interface">
         </a>
         <div class="project-caption">
