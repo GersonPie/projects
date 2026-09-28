@@ -1,12 +1,12 @@
 # Gerson Tamele — Portfolio
 
-Personal portfolio for **Gerson Humberto Tamele**, a full-stack developer focused on web, mobile, backend services, and digital products.
+Personal portfolio for **Gerson Humberto Tamele**, a full-stack developer and UI/UX designer focused on web, mobile, backend services, and useful digital products. His work spans the product journey from interface and user-experience decisions to responsive implementation, API integration, and data.
 
 The site is available in English and Portuguese and follows a clean, content-first portfolio structure inspired by [Brittany Chiang's V3 portfolio](https://v3.brittanychiang.com/).
 
 ## Português
 
-Portfólio pessoal de **Gerson Humberto Tamele**, desenvolvedor full-stack focado em soluções web, mobile, serviços backend e produtos digitais.
+Portfólio pessoal de **Gerson Humberto Tamele**, desenvolvedor full-stack e designer UI/UX focado em soluções web, mobile, serviços backend e produtos digitais úteis. O seu trabalho acompanha o percurso do produto, desde as decisões de interface e experiência de utilização até à implementação responsiva, integração de APIs e dados.
 
 O site está disponível em português e inglês e apresenta competências técnicas, experiência profissional e projectos em destaque.
 
@@ -36,8 +36,10 @@ O site está disponível em português e inglês e apresenta competências técn
 
 ```text
 .
-├── index.html   # Complete portfolio, styles, and interactions
-└── README.md    # Project documentation
+├── assets/
+│   └── milionstore-phone.png  # Featured-project visual
+├── index.html                 # Complete portfolio, styles, and interactions
+└── README.md                  # Project documentation
 ```
 
 ## Running locally
@@ -75,8 +77,8 @@ When adding new text, include both language versions:
 ## Featured work
 
 - [MilionStore](https://milionstore-6b1cd.web.app/products)
-- [MOVEZA](https://moveza-pi.vercel.app/)
-- [Unione Solution](https://unionesolution.vercel.app/)
+- [MOVEZA](https://www.moveza.co.mz/)
+- [Unione Solution](https://www.unionesolution.com/)
 - [Gestor de Microcrédito](https://gestor-de-microcredito.vercel.app)
 - [Unione Books Store](https://unione-solution-lda-books-store.vercel.app)
 
